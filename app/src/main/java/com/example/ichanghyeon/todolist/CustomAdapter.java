@@ -8,14 +8,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by ichanghyeon on 2018. 6. 4..
- */
-
 public class CustomAdapter extends BaseAdapter{
-    ArrayList<String> items = new ArrayList<>();
+    ArrayList<Item> items = new ArrayList<>();
 
-    public CustomAdapter(ArrayList<String> items) {
+    public CustomAdapter(ArrayList<Item> items) {
         this.items = items;
     }
 
@@ -39,8 +35,11 @@ public class CustomAdapter extends BaseAdapter{
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,null);
 
         TextView text = (TextView) v.findViewById(R.id.contentText);
+        TextView smallText = (TextView) v.findViewById(R.id.smallText);
 
-        text.setText(items.get(position));
+        text.setText(items.get(position).bigTitle);
+        smallText.setText(items.get(position).smallTitle);
+
         return v;
     }
 }

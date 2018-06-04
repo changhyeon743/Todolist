@@ -10,11 +10,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> items = new ArrayList<>();
+    ArrayList<Item> items = new ArrayList<>();
     CustomAdapter adapter;
     ListView list;
     EditText inputText;
     Button btn;
+
+    EditText inputTextSmall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         inputText = findViewById(R.id.inputBox);
         btn = findViewById(R.id.button);
-        items.add("안녕");
+
+        inputTextSmall = findViewById(R.id.inputBoxSmall);
+
+        items.add(new Item("큰 제목","작은 제목"));
 
         adapter = new CustomAdapter(items);
 
@@ -34,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                items.add(inputText.getText().toString());
+                items.add(new Item(inputText.getText().toString(),inputTextSmall.getText().toString()));
                 adapter.notifyDataSetChanged();
                 inputText.setText("");
+                inputTextSmall.setText("");
             }
         });
 
