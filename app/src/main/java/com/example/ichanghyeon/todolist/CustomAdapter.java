@@ -9,9 +9,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter{
-    ArrayList<Item> items = new ArrayList<>();
+    ArrayList<Data> items = new ArrayList<>();
 
-    public CustomAdapter(ArrayList<Item> items) {
+    public CustomAdapter(ArrayList<Data> items) {
         this.items = items;
     }
 
@@ -37,8 +37,8 @@ public class CustomAdapter extends BaseAdapter{
         TextView text = (TextView) v.findViewById(R.id.contentText);
         TextView smallText = (TextView) v.findViewById(R.id.smallText);
 
-        text.setText(items.get(position).bigTitle);
-        smallText.setText(items.get(position).smallTitle);
+        text.setText(items.get(position).getTitle());
+        smallText.setText(items.get(position).getInfo());
 
         return v;
     }

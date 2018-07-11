@@ -7,44 +7,6 @@
     tools:context="com.example.ichanghyeon.todolist.MainActivity"
     android:weightSum="3"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:weightSum="10"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="8.5"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="8.5"
-                android:hint="대제목"
-                android:id="@+id/inputBox"
-                />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="8.5"
-                android:hint="소제목"
-                android:id="@+id/inputBoxSmall"
-                />
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:id="@+id/button"
-            android:text="확인"/>
-    </LinearLayout>
-
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,5 +15,24 @@
         >
 
     </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="10"></View>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/button"
+            android:text="추가"/>
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
