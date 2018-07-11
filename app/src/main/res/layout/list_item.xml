@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:layout_marginLeft="10px"
+        android:layout_margin="20px"
         android:textSize="12pt"
         android:text="컨텐츠"
         android:id="@+id/contentText"/>
@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_margin="20px"
         android:layout_marginLeft="10px"
         android:text="소제목"
         android:id="@+id/smallText"/>

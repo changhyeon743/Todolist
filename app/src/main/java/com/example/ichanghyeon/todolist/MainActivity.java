@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,18 +35,26 @@ public class MainActivity extends AppCompatActivity {
 
         list.setAdapter(adapter);
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, AddMemoActivity.class);
+                intent.putExtra("pos", position);
+                intent.putExtra("title", items.get(position).getTitle());
+                intent.putExtra("info", items.get(position).getInfo());
+                intent.putExtra("extrainfo", items.get(position).getExtraInfo());
+                startActivityForResult(intent,2);
+            }
+        });
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddMemoActivity.class);
-                intent.putExtra("data", items);
                 startActivityForResult(intent,1);
-//                items.add(new Item(inputText.getText().toString(),inputTextSmall.getText().toString()));
-//                adapter.notifyDataSetChanged();
-//                inputText.setText("");
-//                inputTextSmall.setText("");
             }
         });
+
 
 
     }
@@ -56,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
                 Data temp = new Data(data.getStringExtra("title"),data.getStringExtra("info"),data.getStringExtra("extrainfo"));
                 items.add(temp);
                 adapter.notifyDataSetChanged();

@@ -18,7 +18,6 @@ public class AddMemoActivity extends AppCompatActivity {
     EditText infoField;
     EditText extrainfoField;
 
-    ArrayList<Data> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +34,7 @@ public class AddMemoActivity extends AppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent();
                 intent.putExtra("title", titleField.getText().toString());
                 intent.putExtra("info", infoField.getText().toString());
@@ -47,5 +47,20 @@ public class AddMemoActivity extends AppCompatActivity {
             }
         });
 
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+            if (resultCode == )
+        }
     }
 }
