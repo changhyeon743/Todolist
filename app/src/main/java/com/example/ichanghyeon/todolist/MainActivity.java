@@ -2,6 +2,8 @@ package com.example.ichanghyeon.todolist;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,11 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Data> items = new ArrayList<>();
     CustomAdapter adapter;
+
+
     ListView list;
 
     Button addBtn;
@@ -25,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadData();
 
         list = findViewById(R.id.listView);
 
@@ -81,4 +90,34 @@ public class MainActivity extends AppCompatActivity {
 
         startActivityForResult(intent,2);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveData();
+    }
+
+    public void saveData() {
+
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String json = new Gson().toJson(items);
+        editor.putString("save", json);
+        editor.commit();
+
+    }
+
+    public void loadData() {
+
+
+        Gson gson = new Gson();
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String json = pref.getString("save", "");
+        ArrayList<Data> shareditems;
+        shareditems = gson.fromJson(json, new TypeToken<ArrayList<Data>>(){}.getType());
+        if(shareditems != null)items.addAll(shareditems);
+
+    }
+
+
 }

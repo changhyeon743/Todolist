@@ -30,7 +30,7 @@ public class EditMemoActivity extends AppCompatActivity {
 
         titleField.setText(getIntent().getStringExtra("title"));
         infoField.setText(getIntent().getStringExtra("info"));
-        extrainfoField.setText(getIntent().getStringExtra("extrainfogit"));
+        extrainfoField.setText(getIntent().getStringExtra("extrainfo"));
 
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
