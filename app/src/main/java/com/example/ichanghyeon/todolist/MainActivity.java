@@ -31,21 +31,10 @@ public class MainActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.button);
 
 
-        adapter = new CustomAdapter(items);
+        adapter = new CustomAdapter(items,MainActivity.this);
 
         list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, AddMemoActivity.class);
-                intent.putExtra("pos", position);
-                intent.putExtra("title", items.get(position).getTitle());
-                intent.putExtra("info", items.get(position).getInfo());
-                intent.putExtra("extrainfo", items.get(position).getExtraInfo());
-                startActivityForResult(intent,2);
-            }
-        });
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +57,28 @@ public class MainActivity extends AppCompatActivity {
                 Data temp = new Data(data.getStringExtra("title"),data.getStringExtra("info"),data.getStringExtra("extrainfo"));
                 items.add(temp);
                 adapter.notifyDataSetChanged();
+                Log.d(String.valueOf(data.getStringExtra("extrainfo")),"실행완료");
+
+            }
+        }
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                Data temp = new Data(data.getStringExtra("title"),data.getStringExtra("info"),data.getStringExtra("extrainfo"));
+                items.set(data.getIntExtra("pos",0),temp);
+                adapter.notifyDataSetChanged();
                 Log.d(String.valueOf(temp.getTitle()),"실행완료");
             }
         }
+    }
+
+    public void editEvent(int position) {
+        Log.d(String.valueOf(items.get(position).getExtraInfo()),"포지션");
+        Intent intent = new Intent(MainActivity.this, EditMemoActivity.class);
+        intent.putExtra("pos", position);
+        intent.putExtra("title", items.get(position).getTitle());
+        intent.putExtra("info", items.get(position).getInfo());
+        intent.putExtra("extrainfo", items.get(position).getExtraInfo());
+
+        startActivityForResult(intent,2);
     }
 }
